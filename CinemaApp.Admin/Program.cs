@@ -10,38 +10,44 @@ namespace CinemaApp.Admin
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("1. Create Customer Data");
-            Console.WriteLine("1.1 Delete Customer Data");
-            Console.WriteLine("2. Create All Movie Data");
-            Console.WriteLine("2.1 Delete All Movie Data");
-            Console.WriteLine("3. Create Hall Data");
-            Console.WriteLine("3.1 Delete Hall Data");
-            Console.WriteLine("4. Create Movie Hall Data");
-            Console.WriteLine("4.1 Delete Movie Hall Data");
-            Console.WriteLine("5. Create Movie Hall Seat");
-            Console.WriteLine("5.1 Delete Movie Hall Seat");
-            double Option = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("-1 .Clear All Data");
+            Console.WriteLine("0. Initialize Data");
+            Console.WriteLine("     0a. Create Customer Data");
+            Console.WriteLine("     0b. Create All Movie Data");
+            Console.WriteLine("     0c. Create Hall Data");
+            Console.WriteLine("     0d. Create Movie Hall Data");
+            Console.WriteLine("     0e. Create Movie Hall Seat");
+            Console.WriteLine("1. Generate Sample Taken Seats");
+            Console.WriteLine("2. Print data");
+            Console.WriteLine("     2a. Print All Users");
+            Console.WriteLine("     2b. Print All Movie");
+            Console.WriteLine("     2c. Print All Halls");
+            Console.WriteLine("     2d. Print All Movie Halls");
+            Console.WriteLine("     2e. Print All Movie Halls Details");
+            string Option = Console.ReadLine();
             switch (Option)
             {
-                case 1:
+                case "-1":
                     break;
-                case 1.1:
+                case "0a":
                     break;
-                case 2:
+                case "0c":
                     break;
-                case 2.1:
+                case "0d":
                     break;
-                case 3:
+                case "0e":
                     break;
-                case 3.1:
+                case "1":
                     break;
-                case 4:
+                case "2a":
                     break;
-                case 4.1:
+                case "2b":
                     break;
-                case 5:
+                case "2c":
                     break;
-                case 5.1:
+                case "2d":
+                    break;
+                case "2e":
                     break;
                 default:
                     break;

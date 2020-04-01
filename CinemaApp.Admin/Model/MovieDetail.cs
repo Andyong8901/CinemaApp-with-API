@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace CinemaApp.Admin.Model
 {
-    public class MovieHall
+    public class MovieDetail
     {
-        public int HallId { get; set; }
+        public int MovieDetailId { get; set; }
+        public string MovieName { get; set; }
+        public string ShowTime { get; set; }
         public int HallNo { get; set; }
-        public int SeatRow { get; set; }
-        public int SeatColumn { get; set; }
-        public int TotalSeat => SeatRow * SeatColumn;
     }
 }

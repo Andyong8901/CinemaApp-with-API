@@ -17,5 +17,6 @@ namespace CinemaApp.Admin.Model
         public DbSet<MovieHallSeat> MovieHallSeats { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<MovieHall> MovieHalls { get; set; }
+        public DbSet<MovieDetail> MovieDetails { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace CinemaApp.Admin.Model
 {
     public class MovieHallSeat
     {
-        public int Id { get; set; }
+        public int HallId { get; set; }
         public string ShowTime { get; set; }
         public string MovieName { get; set; }
         public string SeatNumber { get; set; }

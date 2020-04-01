@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ConsoleTables, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ConsoleTables.2.4.1\lib\net40\ConsoleTables.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -52,8 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Function\CreateFunction.cs" />
+    <Compile Include="Function\PrintDataFunction.cs" />
     <Compile Include="Model\CreateDB.cs" />
     <Compile Include="Model\Movie.cs" />
+    <Compile Include="Model\MovieDetail.cs" />
     <Compile Include="Model\MovieHall.cs" />
     <Compile Include="Model\MovieHallSeat.cs" />
     <Compile Include="Model\User.cs" />
