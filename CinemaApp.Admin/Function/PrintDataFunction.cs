@@ -11,15 +11,15 @@ namespace CinemaApp.Admin.Function
     public class PrintDataFunction
     {
         private CreateDB db = new CreateDB();
-        
+
         //using table for print out all user data in database
         public void PrintAllUsers()
         {
             var AllUsers = db.Users.ToList();
-            var table = new ConsoleTable("Id","Username", "Password", "Email");
+            var table = new ConsoleTable("Id", "Username", "Password", "Email");
             foreach (var item in AllUsers)
             {
-                table.AddRow(item.UserId,item.Username, item.Password, item.Email);
+                table.AddRow(item.UserId, item.Username, item.Password, item.Email);
             }
             table.Write();
         }
@@ -32,22 +32,24 @@ namespace CinemaApp.Admin.Function
             var table = new ConsoleTable("Id", "Movie Title", "Release Date", "Status");
             foreach (var item in AllUsers)
             {
+                string ShowingType;
                 if (item.IsShowing == true)
                 {
-                    item.ShowingType = "Now Showing";
+                    ShowingType = "Now Showing";
                 }
                 else
                 {
-                    item.ShowingType = "Coming Soon";
+                    ShowingType = "Coming Soon";
                 }
-                table.AddRow(item.MovieId,item.MovieName,item.ReleaseDate,item.ShowingType);
+                table.AddRow(item.MovieId, item.MovieName, item.ReleaseDate, ShowingType);
             }
             table.Write();
         }
 
-        public void PrintHallDetail() 
+        //This for show out each hall have how many seat
+        public void PrintHallDetail()
         {
-           var AllHall = db.MovieHalls.ToList();
+            var AllHall = db.MovieHalls.ToList();
             var table = new ConsoleTable("Id", "Hall No", "Total Seats");
             foreach (var item in AllHall)
             {
@@ -56,13 +58,14 @@ namespace CinemaApp.Admin.Function
             table.Write();
         }
 
-        public void PrintMovieHall() 
+        //This for show out each movie at which movie hall
+        public void PrintMovieHall()
         {
             var AllHall = db.MovieDetails.ToList();
-            var table = new ConsoleTable("Id","Movie Title", "Hall No");
+            var table = new ConsoleTable("Id", "Movie Title", "Hall No");
             foreach (var item in AllHall)
             {
-                table.AddRow(item.MovieDetailId,item.MovieName, item.HallNo);
+                table.AddRow(item.MovieDetailId, item.MovieId, item.Hall);
             }
         }
     }

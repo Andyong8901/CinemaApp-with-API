@@ -16,7 +16,7 @@ namespace CinemaApp.Admin.Function
             List<User> users = new List<User>()
             {
             new User(){Username = "John",Password="123456",Email="" },
-            new User(){Username = "Mary",Password="654321",Email="" },
+            new User(){Username = "Mary",Password="654321",Email="" }
             };
             db.Users.AddRange(users);
         }
@@ -26,10 +26,10 @@ namespace CinemaApp.Admin.Function
         {
             List<Movie> movies = new List<Movie>()
             {
-                 new Movie(){MovieName="The Justice League", ReleaseDate="Sunday, 01 March 2020",IsShowing=true},
-                 new Movie(){MovieName="The Matrix", ReleaseDate="Monday, 02 March 2020",IsShowing=true},
-                 new Movie(){MovieName="The Avengers", ReleaseDate="Friday, 06 March 2020",IsShowing=false},
-                 new Movie(){MovieName="Lord Of The Rings", ReleaseDate="Tuesday, 10 March 2020",IsShowing=false}
+                 new Movie(){MovieId=1,MovieName="The Justice League", ReleaseDate=new DateTime(2020,3,10),IsShowing=true},
+                 new Movie(){MovieId=2,MovieName="The Matrix", ReleaseDate=new DateTime(2020,3,12),IsShowing=true},
+                 new Movie(){MovieId=3,MovieName="The Avengers", ReleaseDate=new DateTime(2020,3,16),IsShowing=false},
+                 new Movie(){MovieId=4,MovieName="Lord Of The Rings", ReleaseDate=new DateTime(2020,3,18),IsShowing=false}
             };
             db.Movies.AddRange(movies);
         }
@@ -50,12 +50,12 @@ namespace CinemaApp.Admin.Function
         {
             List<MovieDetail> movieDetails = new List<MovieDetail>()
             {
-                new MovieDetail(){MovieName="The Justice League" ,ShowTime="27/2/2020 10:00:00 AM", HallNo = 3},
-                new MovieDetail(){MovieName="The Justice League" ,ShowTime="27/2/2020 2:30:00 PM",HallNo = 4},
-                new MovieDetail(){MovieName="The Justice League" ,ShowTime="27/2/2020 6:10:00 PM",HallNo = 3},
-                new MovieDetail(){MovieName="The Matrix" ,ShowTime="27/2/2020 10:00:00 AM",HallNo = 3},
-                new MovieDetail(){MovieName="The Matrix" ,ShowTime="27/2/2020 2:30:00 PM",HallNo = 4},
-                new MovieDetail(){MovieName="The Matrix" ,ShowTime="27/2/2020 6:10:00 PM",HallNo = 3}
+                new MovieDetail(){MovieDetailId =101,MovieId =1 ,ShowTime=new DateTime(2020,3,15,10,00,0),Hall =3},
+                new MovieDetail(){MovieDetailId =102,MovieId =1 ,ShowTime=new DateTime(2020,3,15,14,30,0),Hall =4},
+                new MovieDetail(){MovieDetailId =103,MovieId =1 ,ShowTime=new DateTime(2020,3,15,18,10,0),Hall =3},
+                new MovieDetail(){MovieDetailId =104,MovieId =2 ,ShowTime=new DateTime(2020,3,16,10,00,0),Hall =3},
+                new MovieDetail(){MovieDetailId =105,MovieId =2 ,ShowTime=new DateTime(2020,3,16,14,30,0),Hall =4},
+                new MovieDetail(){MovieDetailId =106,MovieId =2 ,ShowTime=new DateTime(2020,3,16,18,10,0),Hall =3}
             };
             db.MovieDetails.AddRange(movieDetails);
         }
