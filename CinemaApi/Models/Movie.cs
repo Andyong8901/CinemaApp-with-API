@@ -16,6 +16,9 @@ namespace CinemaApi.Models
         //public ShowingType ShowingType { get; set; }
         //public string ShowTime { get; set; }
         //public string Hall { get; set; }
+
+        public virtual ICollection<MovieDetail> MovieDetails { get; set; }
+        public virtual ICollection<MovieHallSeat> MovieHallSeat { get; set; }
     }
     //public enum ShowingType
     //{

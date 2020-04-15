@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CinemaApp.Admin.Model
+namespace CinemaApi.Models
 {
-    public class MovieHall
+    public class Hall
     {
         public int HallId { get; set; }
         public int HallNo { get; set; }
         public int SeatRow { get; set; }
         public int SeatColumn { get; set; }
         public int TotalSeat => SeatRow * SeatColumn;
+        public virtual ICollection<MovieDetail> MovieDetails { get; set; }
+        public virtual ICollection<MovieHallSeat> MovieHallSeat { get; set; }
     }
 }

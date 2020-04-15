@@ -64,18 +64,21 @@
     <Compile Include="Function\CreateFunction.cs" />
     <Compile Include="Function\PrintDataFunction.cs" />
     <Compile Include="GlobalVariables.cs" />
-    <Compile Include="Model\CreateDB.cs" />
-    <Compile Include="Model\Movie.cs" />
-    <Compile Include="Model\MovieDetail.cs" />
-    <Compile Include="Model\MovieHall.cs" />
-    <Compile Include="Model\MovieHallSeat.cs" />
-    <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CinemaApi\CinemaApi.csproj">
+      <Project>{B5F36FFC-0756-45A2-A1A7-2A9409391455}</Project>
+      <Name>CinemaApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

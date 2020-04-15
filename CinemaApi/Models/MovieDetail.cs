@@ -9,8 +9,12 @@ namespace CinemaApi.Models
     public class MovieDetail
     {
         public int MovieDetailId { get; set; }
-        public int MovieId { get; set; }
         public DateTime ShowTime { get; set; }
-        public int Hall { get; set; }
+        public int MovieId { get; set; }
+        public virtual Movie Movie { get; set; }
+        public int HallNo { get; set; }
+        public virtual Hall Hall { get; set; }
     }
+
 }
+

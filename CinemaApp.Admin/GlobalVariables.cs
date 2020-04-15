@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace CinemaApp.Admin
 {
@@ -14,7 +13,7 @@ namespace CinemaApp.Admin
 
         static GlobalVariables()
         {
-            WebApiClient.BaseAddress = new Uri("http://localhost:50034/api/");
+            WebApiClient.BaseAddress = new Uri("http://localhost:52676/api/");
             WebApiClient.DefaultRequestHeaders.Clear();
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

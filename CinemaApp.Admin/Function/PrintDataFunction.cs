@@ -1,8 +1,9 @@
-﻿using CinemaApp.Admin.Model;
+﻿using CinemaApi.Models;
 using ConsoleTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,12 +11,13 @@ namespace CinemaApp.Admin.Function
 {
     public class PrintDataFunction
     {
-        private CreateDB db = new CreateDB();
-
         //using table for print out all user data in database
         public void PrintAllUsers()
         {
-            var AllUsers = db.Users.ToList();
+            IEnumerable<User> AllUsers;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Cinema").Result;
+            AllUsers = response.Content.ReadAsAsync<IEnumerable<User>>().Result;
+           
             var table = new ConsoleTable("Id", "Username", "Password", "Email");
             foreach (var item in AllUsers)
             {
@@ -28,9 +30,11 @@ namespace CinemaApp.Admin.Function
         //using if else to check the movie is showing or coming soon
         public void PrintAllMovie()
         {
-            var AllUsers = db.Movies.ToList();
+            IEnumerable<Movie> AllMovies;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Cinema").Result;
+            AllMovies = response.Content.ReadAsAsync<IEnumerable<Movie>>().Result;
             var table = new ConsoleTable("Id", "Movie Title", "Release Date", "Status");
-            foreach (var item in AllUsers)
+            foreach (var item in AllMovies)
             {
                 string ShowingType;
                 if (item.IsShowing == true)
@@ -49,7 +53,10 @@ namespace CinemaApp.Admin.Function
         //This for show out each hall have how many seat
         public void PrintHallDetail()
         {
-            var AllHall = db.MovieHalls.ToList();
+            IEnumerable<Hall> AllHall;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Cinema").Result;
+            AllHall = response.Content.ReadAsAsync<IEnumerable<Hall>>().Result;
+
             var table = new ConsoleTable("Id", "Hall No", "Total Seats");
             foreach (var item in AllHall)
             {
@@ -61,11 +68,14 @@ namespace CinemaApp.Admin.Function
         //This for show out each movie at which movie hall
         public void PrintMovieHall()
         {
-            var AllHall = db.MovieDetails.ToList();
+            IEnumerable<MovieDetail> AllMovieHall;
+            HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("Cinema").Result;
+            AllMovieHall = response.Content.ReadAsAsync<IEnumerable<MovieDetail>>().Result;
+
             var table = new ConsoleTable("Id", "Movie Title", "Hall No");
-            foreach (var item in AllHall)
+            foreach (var item in AllMovieHall)
             {
-                table.AddRow(item.MovieDetailId, item.MovieId, item.Hall);
+                table.AddRow(item.MovieDetailId, item.MovieId, item.HallNo);
             }
         }
     }
