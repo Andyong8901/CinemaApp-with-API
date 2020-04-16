@@ -87,7 +87,6 @@ namespace CinemaApp.Admin
                         Console.Clear();
                         Console.WriteLine("    Add Showing Movie Start");
                         CreateData.CreateShowingMovie();
-                        Console.WriteLine("    Add Showing Movie Done");
                         break;
                     case "0e":
                         Console.Clear();
@@ -108,7 +107,7 @@ namespace CinemaApp.Admin
                     case "2":
                         Console.Clear();
                         Console.WriteLine("All User Data");
-                        PrintData.PrintAllUsers();
+                        PrintData.PrintAllUsers(); 
                         Console.WriteLine("\n\n");
                         Console.WriteLine("All Movie Data");
                         PrintData.PrintAllMovie();

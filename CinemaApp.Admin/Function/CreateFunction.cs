@@ -62,7 +62,7 @@ namespace CinemaApp.Admin.Function
 
         //Create Hall Movie Data And Add To Database To Store
         public void CreateShowingMovie()
-        {
+        {           
             //Create A List To Store All Showing Movie Detail
             List<MovieDetail> movieDetails = new List<MovieDetail>()
             {
@@ -74,27 +74,41 @@ namespace CinemaApp.Admin.Function
                 new MovieDetail(){MovieDetailId =106,MovieId =FindMovie(2) ,ShowTime=new DateTime(2020,3,16,18,10,0),HallId =FindHall(3)}
             };
             //End Create
+            
             //Pass In To Database To Store All Showing Movie Detail
             response = GlobalVariables.WebApiClient.PostAsJsonAsync("Cinema/AddMovieDetail", movieDetails).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Add Movie Hall Data Failed");
+            }
+            Console.WriteLine("    Add Showing Movie Done");
             //End Pass
         }
 
-        public int FindMovie(int MovieNo)
+        public int FindMovie(int? MovieNo)
         {
             //Get Movie Detail
             Movie GetMovies;
             response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetMovie/{MovieNo}").Result;
             GetMovies = response.Content.ReadAsAsync<Movie>().Result;
             //End Get Movie Detail
+            if (GetMovies == null)
+            {
+                return 0;
+            }
             return GetMovies.MovieId;
         }
-        public int FindHall(int HallNo)
+        public int FindHall(int? HallNo)
         {
             //Get Hall Detail
             Hall GetHall;
             response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetHall/{HallNo}").Result;
             GetHall = response.Content.ReadAsAsync<Hall>().Result;
             //End Get Hall Detail
+            if (GetHall == null)
+            {
+                return 0;
+            }
             return GetHall.HallId;
         }
 

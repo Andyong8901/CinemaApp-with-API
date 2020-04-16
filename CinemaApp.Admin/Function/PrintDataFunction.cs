@@ -138,6 +138,7 @@ namespace CinemaApp.Admin.Function
                 table.AddRow(item.MovieDetailId, item.Movie.MovieName, item.Hall.HallNo);
             }
             table.Write();
+            Console.WriteLine("\n\n");
         }
         //Hall End
     }

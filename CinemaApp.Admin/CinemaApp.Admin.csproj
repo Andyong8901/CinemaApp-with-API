@@ -75,9 +75,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CinemaApi\CinemaApi.csproj">
       <Project>{B5F36FFC-0756-45A2-A1A7-2A9409391455}</Project>
