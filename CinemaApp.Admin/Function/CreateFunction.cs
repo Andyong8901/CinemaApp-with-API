@@ -105,6 +105,7 @@ namespace CinemaApp.Admin.Function
             response = GlobalVariables.WebApiClient.GetAsync("Cinema/GetMovieDetail").Result;
             MovieShowList = response.Content.ReadAsAsync<IEnumerable<MovieDetail>>().Result;
             //End Get Movie Detail
+
             if (Option != "NoStatus")
             {
                 response = GlobalVariables.WebApiClient.DeleteAsync("Cinema/DeleteSeat/").Result;
@@ -137,43 +138,8 @@ namespace CinemaApp.Admin.Function
                         Seat.Add(class1);
                     }
                 }
-
-                //SeatNum(item.Hall.SeatRow, item.Hall.SeatColumn, item.ShowTime, item.MovieId,item.HallId, Option);
             };
-
             response = GlobalVariables.WebApiClient.PostAsJsonAsync("Cinema/AddMovieSeat", Seat).Result;
         }
-
-        //public List<HallSeat> SeatNum(int SeatRow, int SeatColumn, DateTime ShowTime, int MovieId,int HallId, string CheckOption)
-        //{
-        //    Random rnd1 = new Random();
-        //    List<HallSeat> Seat = new List<HallSeat>();
-        //    Thread.Sleep(1);
-        //    for (var x = 1; x <= SeatRow; x++)
-        //    {
-        //        for (var i = 1; i <= SeatColumn; i++)
-        //        {
-        //            SeatStatus Status;
-        //            if (CheckOption != "NoStatus")
-        //            {
-        //                Status = (SeatStatus)rnd1.Next(2);
-        //            }
-        //            else
-        //            {
-        //                Status = SeatStatus.Empty;
-        //            }
-        //            HallSeat class1 = new HallSeat
-        //            {
-        //                SeatNumber = x + "," + i,
-        //                Seatstatus = Status,
-        //                ShowTime = ShowTime,
-        //                HallId = HallId,
-        //                MovieId = MovieId
-        //            };
-        //            Seat.Add(class1);
-        //        }
-        //    }
-        //    return Seat;
-        //}
     }
 }

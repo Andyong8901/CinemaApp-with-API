@@ -10,11 +10,9 @@ namespace CinemaApp.Admin
 {
     class Program
     {
-        
+
         static void Main(string[] args)
         {
-            HttpResponseMessage responses;
-
             CreateFunction CreateData = new CreateFunction();
 
             PrintDataFunction PrintData = new PrintDataFunction();
@@ -35,14 +33,14 @@ namespace CinemaApp.Admin
                 Console.WriteLine("     2c. Print All Halls");
                 Console.WriteLine("     2d. Print All Movie Halls");
                 Console.WriteLine("     2e. Print All Movie Halls Details");
-                Console.Write("Enter Option : ");   
+                Console.Write("Enter Option : ");
                 string Option = Console.ReadLine();
 
                 switch (Option)
                 {
                     case "-1":
                         Console.Clear();
-                        responses = GlobalVariables.WebApiClient.DeleteAsync("Cinema/DeleteAll").Result;
+                        HttpResponseMessage responses = GlobalVariables.WebApiClient.DeleteAsync("Cinema/DeleteAll").Result;
                         Console.WriteLine("Delete Done");
                         break;
                     case "0":
@@ -102,6 +100,9 @@ namespace CinemaApp.Admin
                         Console.WriteLine("     Movie Seat Status Start");
                         CreateData.CreateMovieSeat("GetStatus");
                         Console.WriteLine("     Movie Seat Status Done");
+                        Console.WriteLine("\n\n");
+                        Console.WriteLine("All Movie Hall Detail Data");
+                        PrintData.PrintMovieSeat();
                         break;
 
                     case "2":
