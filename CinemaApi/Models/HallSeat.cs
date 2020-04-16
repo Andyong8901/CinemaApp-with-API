@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CinemaApi.Models
 {
-    public class MovieHallSeat
+    public class HallSeat
     {
         [Key]
         public int SeatId { get; set; }
@@ -16,8 +16,8 @@ namespace CinemaApi.Models
         public SeatStatus Seatstatus { get; set; }
         public int HallId { get; set; }
         public virtual Hall Hall { get; set; }
-        public int MovieId { get; set; }
-        public virtual Movie Movie { get; set; }
+        //public int MovieDetailId { get; set; }
+        //public virtual MovieDetail MovieDetail { get; set; }
     }
     public enum SeatStatus
     {

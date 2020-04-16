@@ -10,6 +10,7 @@ namespace CinemaApi.Models
     public class Movie
     {
         public int MovieId { get; set; }
+        public int MovieNo { get; set; }
         public string MovieName { get; set; }
         public DateTime ReleaseDate { get; set; }
         public bool IsShowing { get; set; }
@@ -18,7 +19,6 @@ namespace CinemaApi.Models
         //public string Hall { get; set; }
 
         public virtual ICollection<MovieDetail> MovieDetails { get; set; }
-        public virtual ICollection<MovieHallSeat> MovieHallSeat { get; set; }
     }
     //public enum ShowingType
     //{

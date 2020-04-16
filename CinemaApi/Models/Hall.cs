@@ -13,7 +13,8 @@ namespace CinemaApi.Models
         public int SeatRow { get; set; }
         public int SeatColumn { get; set; }
         public int TotalSeat => SeatRow * SeatColumn;
-        public virtual ICollection<MovieDetail> MovieDetails { get; set; }
-        public virtual ICollection<MovieHallSeat> MovieHallSeat { get; set; }
+
+        public virtual ICollection<MovieDetail> MovieDetail { get; set; }
+        public virtual ICollection<HallSeat> HallSeat { get; set; }
     }
 }

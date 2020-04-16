@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,9 +10,15 @@ namespace CinemaApp.Admin
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
-            CreateFunction create = new CreateFunction();
+            HttpResponseMessage responses;
+
+            CreateFunction CreateData = new CreateFunction();
+
+            PrintDataFunction PrintData = new PrintDataFunction();
+
             while (true)
             {
                 Console.WriteLine("-1 .Clear All Data");
@@ -34,40 +41,114 @@ namespace CinemaApp.Admin
                 switch (Option)
                 {
                     case "-1":
+                        Console.Clear();
+                        responses = GlobalVariables.WebApiClient.DeleteAsync("Cinema/DeleteAll").Result;
+                        Console.WriteLine("Delete Done");
                         break;
                     case "0":
+                        Console.Clear();
+                        Console.WriteLine("    Add User Start");
+                        CreateData.CreateUser();
+                        Console.WriteLine("    Add User Done");
+
+                        Console.WriteLine("    Add Movie Start");
+                        CreateData.CreateMovie();
+                        Console.WriteLine("    Add Movie Done");
+
+                        Console.WriteLine("    Add Hall Start");
+                        CreateData.CreateHall();
+                        Console.WriteLine("    Add Hall Done");
+
+                        Console.WriteLine("    Add Showing Movie Start");
+                        CreateData.CreateShowingMovie();
+                        Console.WriteLine("    Add Showing Movie Done");
+
+                        Console.WriteLine("    Add MovieSeat Start");
+                        CreateData.CreateMovieSeat("NoStatus");
+                        Console.WriteLine("    Add MovieSeat Done");
                         break;
+
                     case "0a":
                         Console.Clear();
-                        create.CreateUser();
-                        Console.WriteLine("OK");
+                        Console.WriteLine("    Add User Done");
+                        CreateData.CreateUser();
+                        Console.WriteLine("    Add User Done");
                         break;
                     case "0b":
                         Console.Clear();
-                        create.CreateMovie();
-                        Console.WriteLine("OK");
+                        Console.WriteLine("    Add Movie Start");
+                        CreateData.CreateMovie();
+                        Console.WriteLine("    Add Movie Done");
                         break;
                     case "0c":
+                        Console.WriteLine("    Add Hall Start");
+                        CreateData.CreateHall();
+                        Console.WriteLine("    Add Hall Done");
                         break;
                     case "0d":
+                        Console.Clear();
+                        Console.WriteLine("    Add Showing Movie Start");
+                        CreateData.CreateShowingMovie();
+                        Console.WriteLine("    Add Showing Movie Done");
                         break;
                     case "0e":
+                        Console.Clear();
+                        Console.WriteLine("    Add MovieSeat Start");
+                        CreateData.CreateMovieSeat("NoStatus");
+                        Console.WriteLine("    Add MovieSeat Done");
                         break;
                     case "1":
+                        Console.Clear();
+                        Console.WriteLine("     Movie Seat Status Start");
+                        CreateData.CreateMovieSeat("GetStatus");
+                        Console.WriteLine("     Movie Seat Status Done");
                         break;
+
                     case "2":
+                        Console.Clear();
+                        Console.WriteLine("All User Data");
+                        PrintData.PrintAllUsers();
+                        Console.WriteLine("\n\n");
+                        Console.WriteLine("All Movie Data");
+                        PrintData.PrintAllMovie();
+                        Console.WriteLine("\n\n");
+                        Console.WriteLine("All Hall Data");
+                        PrintData.PrintHallDetail();
+                        Console.WriteLine("\n\n");
+                        Console.WriteLine("All Movie Hall Data");
+                        PrintData.PrintMovieHall();
+                        Console.WriteLine("\n\n");
+                        Console.WriteLine("All Movie Hall Detail Data");
+                        PrintData.PrintMovieSeat();
                         break;
                     case "2a":
+                        Console.Clear();
+                        Console.WriteLine("All User Data");
+                        PrintData.PrintAllUsers();
                         break;
                     case "2b":
+                        Console.Clear();
+                        Console.WriteLine("All Movie Data");
+                        PrintData.PrintAllMovie();
                         break;
                     case "2c":
+                        Console.Clear();
+                        Console.WriteLine("All Hall Data");
+                        PrintData.PrintHallDetail();
                         break;
                     case "2d":
+                        Console.Clear();
+                        Console.WriteLine("All Movie Hall Data");
+                        PrintData.PrintMovieHall();
                         break;
                     case "2e":
+                        Console.Clear();
+                        Console.WriteLine("All Movie Hall Detail Data");
+                        PrintData.PrintMovieSeat();
                         break;
                     default:
+                        Console.Clear();
+                        Console.WriteLine("Please Enter Option In List");
                         break;
                 }
             }

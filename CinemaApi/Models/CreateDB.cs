@@ -14,7 +14,7 @@ namespace CinemaApi.Models
 
         }
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<MovieHallSeat> MovieHallSeats { get; set; }
+        public DbSet<HallSeat> HallSeats { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Hall> Halls { get; set; }
         public DbSet<MovieDetail> MovieDetails { get; set; }

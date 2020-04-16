@@ -1,9 +1,9 @@
-namespace CinemaApi.Migrations
+﻿namespace CinemaApi.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddDb : DbMigration
+    public partial class AddDB : DbMigration
     {
         public override void Up()
         {
@@ -19,34 +19,7 @@ namespace CinemaApi.Migrations
                 .PrimaryKey(t => t.HallId);
             
             CreateTable(
-                "dbo.MovieDetails",
-                c => new
-                    {
-                        MovieDetailId = c.Int(nullable: false, identity: true),
-                        ShowTime = c.DateTime(nullable: false),
-                        MovieId = c.Int(nullable: false),
-                        HallNo = c.Int(nullable: false),
-                        Hall_HallId = c.Int(),
-                    })
-                .PrimaryKey(t => t.MovieDetailId)
-                .ForeignKey("dbo.Halls", t => t.Hall_HallId)
-                .ForeignKey("dbo.Movies", t => t.MovieId, cascadeDelete: true)
-                .Index(t => t.MovieId)
-                .Index(t => t.Hall_HallId);
-            
-            CreateTable(
-                "dbo.Movies",
-                c => new
-                    {
-                        MovieId = c.Int(nullable: false, identity: true),
-                        MovieName = c.String(),
-                        ReleaseDate = c.DateTime(nullable: false),
-                        IsShowing = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.MovieId);
-            
-            CreateTable(
-                "dbo.MovieHallSeats",
+                "dbo.HallSeats",
                 c => new
                     {
                         SeatId = c.Int(nullable: false, identity: true),
@@ -54,13 +27,37 @@ namespace CinemaApi.Migrations
                         SeatNumber = c.String(),
                         Seatstatus = c.Int(nullable: false),
                         HallId = c.Int(nullable: false),
-                        MovieId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.SeatId)
                 .ForeignKey("dbo.Halls", t => t.HallId, cascadeDelete: true)
+                .Index(t => t.HallId);
+            
+            CreateTable(
+                "dbo.MovieDetails",
+                c => new
+                    {
+                        MovieDetailId = c.Int(nullable: false, identity: true),
+                        ShowTime = c.DateTime(nullable: false),
+                        MovieId = c.Int(nullable: false),
+                        HallId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.MovieDetailId)
+                .ForeignKey("dbo.Halls", t => t.HallId, cascadeDelete: true)
                 .ForeignKey("dbo.Movies", t => t.MovieId, cascadeDelete: true)
-                .Index(t => t.HallId)
-                .Index(t => t.MovieId);
+                .Index(t => t.MovieId)
+                .Index(t => t.HallId);
+            
+            CreateTable(
+                "dbo.Movies",
+                c => new
+                    {
+                        MovieId = c.Int(nullable: false, identity: true),
+                        MovieNo = c.Int(nullable: false),
+                        MovieName = c.String(),
+                        ReleaseDate = c.DateTime(nullable: false),
+                        IsShowing = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.MovieId);
             
             CreateTable(
                 "dbo.Users",
@@ -77,18 +74,16 @@ namespace CinemaApi.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.MovieHallSeats", "MovieId", "dbo.Movies");
-            DropForeignKey("dbo.MovieHallSeats", "HallId", "dbo.Halls");
             DropForeignKey("dbo.MovieDetails", "MovieId", "dbo.Movies");
-            DropForeignKey("dbo.MovieDetails", "Hall_HallId", "dbo.Halls");
-            DropIndex("dbo.MovieHallSeats", new[] { "MovieId" });
-            DropIndex("dbo.MovieHallSeats", new[] { "HallId" });
-            DropIndex("dbo.MovieDetails", new[] { "Hall_HallId" });
+            DropForeignKey("dbo.MovieDetails", "HallId", "dbo.Halls");
+            DropForeignKey("dbo.HallSeats", "HallId", "dbo.Halls");
+            DropIndex("dbo.MovieDetails", new[] { "HallId" });
             DropIndex("dbo.MovieDetails", new[] { "MovieId" });
+            DropIndex("dbo.HallSeats", new[] { "HallId" });
             DropTable("dbo.Users");
-            DropTable("dbo.MovieHallSeats");
             DropTable("dbo.Movies");
             DropTable("dbo.MovieDetails");
+            DropTable("dbo.HallSeats");
             DropTable("dbo.Halls");
         }
     }
