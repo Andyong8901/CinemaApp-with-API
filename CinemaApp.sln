@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApp.Admin", "CinemaApp.Admin\CinemaApp.Admin.csproj", "{C021AA05-81C1-40B0-88D1-A056A7AC6E46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApp.Customer", "CinemaApp.Customer\CinemaApp.Customer.csproj", "{234AE4E5-D23D-463C-A78B-B0495EFDEE12}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApi", "CinemaApi\CinemaApi.csproj", "{B5F36FFC-0756-45A2-A1A7-2A9409391455}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.DomainModelEntity", "Cinema.DomainModelEntity\Cinema.DomainModelEntity.csproj", "{A23443A5-7F87-4A68-AB8E-9D65A5462FB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.InfrastructurePersistance", "Cinema.InfrastructurePersistance\Cinema.InfrastructurePersistance.csproj", "{BB51B7A3-90D4-43CA-AE09-A93E0A75282B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaApp.Customer", "CinemaApp.Customer\CinemaApp.Customer.csproj", "{57F2A8B8-0098-4389-A16F-E4FBD106245D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{C021AA05-81C1-40B0-88D1-A056A7AC6E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C021AA05-81C1-40B0-88D1-A056A7AC6E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C021AA05-81C1-40B0-88D1-A056A7AC6E46}.Release|Any CPU.Build.0 = Release|Any CPU
-		{234AE4E5-D23D-463C-A78B-B0495EFDEE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{234AE4E5-D23D-463C-A78B-B0495EFDEE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{234AE4E5-D23D-463C-A78B-B0495EFDEE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{234AE4E5-D23D-463C-A78B-B0495EFDEE12}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B5F36FFC-0756-45A2-A1A7-2A9409391455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5F36FFC-0756-45A2-A1A7-2A9409391455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5F36FFC-0756-45A2-A1A7-2A9409391455}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{BB51B7A3-90D4-43CA-AE09-A93E0A75282B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB51B7A3-90D4-43CA-AE09-A93E0A75282B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB51B7A3-90D4-43CA-AE09-A93E0A75282B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F2A8B8-0098-4389-A16F-E4FBD106245D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F2A8B8-0098-4389-A16F-E4FBD106245D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F2A8B8-0098-4389-A16F-E4FBD106245D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F2A8B8-0098-4389-A16F-E4FBD106245D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
