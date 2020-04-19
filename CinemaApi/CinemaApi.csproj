@@ -169,13 +169,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004151647522_AddDB.cs" />
-    <Compile Include="Migrations\202004151647522_AddDB.designer.cs">
-      <DependentUpon>202004151647522_AddDB.cs</DependentUpon>
+    <Compile Include="Migrations\202004171338514_AddDB.cs" />
+    <Compile Include="Migrations\202004171338514_AddDB.designer.cs">
+      <DependentUpon>202004171338514_AddDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004171405275_changeType.cs" />
+    <Compile Include="Migrations\202004171405275_changeType.designer.cs">
+      <DependentUpon>202004171405275_changeType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004171523142_AddProp.cs" />
+    <Compile Include="Migrations\202004171523142_AddProp.designer.cs">
+      <DependentUpon>202004171523142_AddProp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CreateDB.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieCart.cs" />
     <Compile Include="Models\MovieDetail.cs" />
     <Compile Include="Models\Hall.cs" />
     <Compile Include="Models\HallSeat.cs" />
@@ -212,6 +221,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -266,9 +276,25 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004151647522_AddDB.resx">
-      <DependentUpon>202004151647522_AddDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004171338514_AddDB.resx">
+      <DependentUpon>202004171338514_AddDB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004171405275_changeType.resx">
+      <DependentUpon>202004171405275_changeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004171523142_AddProp.resx">
+      <DependentUpon>202004171523142_AddProp.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cinema.DomainModelEntity\Cinema.DomainModelEntity.csproj">
+      <Project>{A23443A5-7F87-4A68-AB8E-9D65A5462FB4}</Project>
+      <Name>Cinema.DomainModelEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cinema.InfrastructurePersistance\Cinema.InfrastructurePersistance.csproj">
+      <Project>{BB51B7A3-90D4-43CA-AE09-A93E0A75282B}</Project>
+      <Name>Cinema.InfrastructurePersistance</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

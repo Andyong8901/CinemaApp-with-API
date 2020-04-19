@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CinemaApi.Models
+namespace Cinema.DomainModelEntity
 {
     public class MovieDetail
     {

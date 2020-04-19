@@ -7,13 +7,13 @@ namespace CinemaApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class AddDB : IMigrationMetadata
+    public sealed partial class changeType : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(changeType));
         
         string IMigrationMetadata.Id
         {
-            get { return "202004151647522_AddDB"; }
+            get { return "202004171405275_changeType"; }
         }
         
         string IMigrationMetadata.Source

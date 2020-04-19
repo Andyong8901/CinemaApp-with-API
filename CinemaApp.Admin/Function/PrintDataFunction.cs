@@ -21,6 +21,10 @@ namespace CinemaApp.Admin.Function
             response = GlobalVariables.WebApiClient.GetAsync("Cinema/GetUser").Result;
             AllUsers = response.Content.ReadAsAsync<IEnumerable<User>>().Result;
             //End Get All User Detail
+            if (AllUsers.Count()== 0)
+            {
+                Console.WriteLine("No Data For Users");
+            }
 
             var table = new ConsoleTable("Id", "Username", "Password", "Email");
             foreach (var item in AllUsers)
@@ -45,6 +49,10 @@ namespace CinemaApp.Admin.Function
             response = GlobalVariables.WebApiClient.GetAsync("Cinema/GetMovie/").Result;
             AllMovies = response.Content.ReadAsAsync<IEnumerable<Movie>>().Result;
             //End Get All Movie Detail
+            if (AllMovies.Count() == 0)
+            {
+                Console.WriteLine("No Data For Movie");
+            }
 
             var table = new ConsoleTable("Id", "Movie Title", "Release Date", "Status");
             foreach (var item in AllMovies)
@@ -71,6 +79,11 @@ namespace CinemaApp.Admin.Function
             AllMovieHall = response.Content.ReadAsAsync<IEnumerable<MovieDetail>>().Result;
             //End Get Movie Detail
 
+            if (AllMovieHall.Count() != 0)
+            {
+                Console.WriteLine("No Movie Detail Data Can't Not Create Hall Seat");
+            }
+
             //Get Hall Seat
             IEnumerable<HallSeat> AllHallSeat;
             response = GlobalVariables.WebApiClient.GetAsync("Cinema/GetHallSeat").Result;
@@ -80,6 +93,7 @@ namespace CinemaApp.Admin.Function
             foreach (var itemMovie in AllMovieHall)
             {
                 var FilterMovie = AllHallSeat.ToList().Where(m => m.HallId == itemMovie.HallId && m.ShowTime == itemMovie.ShowTime);
+
                 Console.WriteLine($"Movie Name : {itemMovie.Movie.MovieName} | Show Time : {itemMovie.ShowTime} | Hall No : {itemMovie.Hall.HallNo}");
                 foreach (var item in FilterMovie)
                 {

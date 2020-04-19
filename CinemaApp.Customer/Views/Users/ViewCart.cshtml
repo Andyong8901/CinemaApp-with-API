@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CinemaApi.Models.MovieCart>
+
+@{
+    ViewBag.Title = "ViewCart";
+}
+
+<h2>ViewCart</h2>
+
+<p>
+    @Html.ActionLink("Cancel Order", "RemoveAllCart")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeatNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatNo)
+            </td>
+            <td>
+               RM @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.ActionLink("Cancel", "RemoveCart", new { id = item.MovieCartId }) 
+            </td>
+        </tr>
+    }
+<tr>
+    <td></td>
+    <td></td>
+    <td>RM @ViewBag.Total</td>
+    <td>
+        @Html.ActionLink("Confirm", "ConfirmOrder")
+    </td>
+</tr>
+</table>
+

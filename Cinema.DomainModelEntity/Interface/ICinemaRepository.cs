@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.DomainModelEntity
+namespace Cinema.DomainModelEntity.Interface
 {
-    public class Class1
+    public interface ICinemaRepository
     {
+        IEnumerable<User> GetUsers();
     }
 }

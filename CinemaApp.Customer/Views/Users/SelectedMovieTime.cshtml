@@ -1,0 +1,92 @@
+﻿@model IEnumerable<CinemaApi.Models.HallSeat>
+
+@{
+    ViewBag.Title = "SelectedMovieTime";
+}
+
+<h2>SelectedMovieTime</h2>
+
+<p style="float:right">
+    @Html.ActionLink("Order Cart", "ViewCart")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hall.HallNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeatNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Seatstatus)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hall.HallNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShowTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatNumber)
+            </td>
+            <td id="@item.SeatId" class="Status">
+                @Html.DisplayFor(modelItem => item.Seatstatus)
+            </td >
+            <td id="Select" class="@item.SeatId">
+                <input class="SelectBtn" id="@item.SeatId" type="button" value="Select Seat" />
+                @*@Html.ActionLink("Select Seat", "SelectSeat", new { id=item.SeatId }) |*@
+            </td>
+        </tr>
+    }
+
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(".SelectBtn").click(function () {
+        var GetSeatId = $(this).attr("id");
+        Checking(GetSeatId);
+    })
+
+    const Checking = (GetSeatId) => {
+        var getid = $("#" + GetSeatId);
+        debugger
+        $.ajax({
+            type: "POST",
+            url: "/Users/SelectSeat",
+            data: {
+                SeatId: GetSeatId
+            },
+            success: function (response) {
+
+                if (response.CheckSeat = true) {
+                    getid.attr("disabled", true);
+                }
+
+            }
+        })
+    }
+    const CheckStatus = () => {
+        var status = $(".Status").toArray();
+        debugger;
+        Object.keys(status).forEach(function (num) {
+
+            debugger;
+            var getstatus = status[num];
+
+            if (getstatus.innerText == "Taken") {
+                GetSeatId = $("." + getstatus.id).children();
+                GetSeatId.attr("disabled", true);
+            }
+        })
+    }
+    CheckStatus();
+</script>

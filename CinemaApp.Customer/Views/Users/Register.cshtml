@@ -1,0 +1,119 @@
+﻿@model CinemaApi.Models.User
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>User</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div id="NameError"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = "required", type = "email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div id="Emailerror"></div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" id="CreateBtn" class="btn btn-default" />
+                @Html.ActionLink("Login", "Login")
+            </div>
+        </div>
+    </div>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $("#CreateBtn").attr("disabled", true);
+
+    $("#Email").keyup(function (email) {
+        var getEmail = email.target.value;
+        CheckingEmail(getEmail);
+    })
+    $("#Username").keyup(function (name) {
+        var getName = name.target.value;
+        CheckingName(getName);
+    })
+
+    const CheckingName = (username) => {
+        var username = $("#Username").val();
+        debugger
+        $.ajax({
+            type: "POST",
+            url: "/Users/UserCheckName",
+            data: {
+                Username: username
+            },
+            success: function (response) {
+
+                if (response.Checkname == false) {
+
+                    $("#NameError").attr('class', 'alert alert-danger text-center').text(response.text);
+                    $("#CreateBtn").attr("disabled", true);
+                }
+
+                else {
+                    $("#NameError").attr('class', '').text("");
+                    $("#CreateBtn").attr("disabled", false);
+                }
+                if ($("#Emailerror").text() != "") {
+                    $("#CreateBtn").attr("disabled", true);
+                }
+            }
+        })
+    }
+    const CheckingEmail = (email) => {
+        debugger
+        $.ajax({
+            type: "POST",
+            url: "/Users/UserCheckEmail",
+            data: {
+                Email: email
+            },
+            success: function (response) {
+
+                if (response.Checkemail == false) {
+
+                    $("#Emailerror").attr('class', 'alert alert-danger text-center').text(response.text);
+                    $("#CreateBtn").attr("disabled", true);
+                }
+
+                else {
+                    $("#Emailerror").attr('class', '').text("");
+                    $("#CreateBtn").attr("disabled", false);
+                }
+                if ($("#NameError").text() != "") {
+                    $("#CreateBtn").attr("disabled", true);
+                }
+            }
+        })
+    }
+</script>

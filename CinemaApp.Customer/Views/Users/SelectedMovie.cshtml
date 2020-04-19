@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CinemaApi.Models.MovieDetail>
+
+@{
+    ViewBag.Title = "SelectedMovie";
+}
+
+<h2>SelectedMovie</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hall.HallId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Movie.MovieName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hall.HallId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Movie.MovieName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowTime)
+        </td>
+        <td>
+            @Html.ActionLink("Select Time", "SelectedMovieTime", new { id=item.MovieDetailId , HallId = item.HallId})
+        </td>
+    </tr>
+}
+
+</table>

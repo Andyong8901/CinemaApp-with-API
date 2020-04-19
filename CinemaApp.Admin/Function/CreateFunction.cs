@@ -98,6 +98,7 @@ namespace CinemaApp.Admin.Function
             }
             return GetMovies.MovieId;
         }
+
         public int FindHall(int? HallNo)
         {
             //Get Hall Detail
@@ -120,6 +121,11 @@ namespace CinemaApp.Admin.Function
             MovieShowList = response.Content.ReadAsAsync<IEnumerable<MovieDetail>>().Result;
             //End Get Movie Detail
 
+            //if (MovieShowList.Count() == 0)
+            //{
+            //    Console.WriteLine("No Movie Detail Data Can't Not Create Hall Seat");
+            //}
+
             if (Option != "NoStatus")
             {
                 response = GlobalVariables.WebApiClient.DeleteAsync("Cinema/DeleteSeat/").Result;
@@ -127,9 +133,14 @@ namespace CinemaApp.Admin.Function
             List<HallSeat> Seat = new List<HallSeat>();
             foreach (var item in MovieShowList)
             {
+                double SeatPrice = 15;
                 Random rnd1 = new Random();
                 for (var x = 1; x <= item.Hall.SeatRow; x++)
                 {
+                    if (item.Hall.SeatRow >=1)
+                    {
+                        SeatPrice += 5;
+                    }
                     for (var i = 1; i <= item.Hall.SeatColumn; i++)
                     {
                         SeatStatus Status;
@@ -147,6 +158,7 @@ namespace CinemaApp.Admin.Function
                             SeatNumber = x + "," + i,
                             Seatstatus = Status,
                             ShowTime = item.ShowTime,
+                            SeatPrice = SeatPrice,
                             HallId = item.HallId,
                         };
                         Seat.Add(class1);

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Cinema.DomainModelEntity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CinemaApi.Models
+namespace CinemaApi.InfrastructurePersistance
 {
     public class CreateDB : DbContext
     {
