@@ -33,20 +33,21 @@
                 @Html.DisplayFor(modelItem => item.SeatNo)
             </td>
             <td>
-               RM @Html.DisplayFor(modelItem => item.Amount)
+                RM @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @Html.ActionLink("Cancel", "RemoveCart", new { id = item.MovieCartId }) 
+                @Html.ActionLink("Cancel", "RemoveCart", new { id = item.MovieCartId })
             </td>
         </tr>
     }
-<tr>
-    <td></td>
-    <td></td>
-    <td>RM @ViewBag.Total</td>
-    <td>
-        @Html.ActionLink("Confirm", "ConfirmOrder")
-    </td>
-</tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>RM @ViewBag.Total</td>
+        <td>
+            @Html.ActionLink("Confirm", "ConfirmOrder")
+        </td>
+    </tr>
 </table>
 
+@Html.ActionLink("Back To Seat", "SelectedMovieTime",new {id = ViewBag.DetailId , HallId = Session["HallId"] })

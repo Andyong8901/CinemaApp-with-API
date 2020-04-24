@@ -4,18 +4,17 @@
     ViewBag.Title = "SelectedMovieTime";
 }
 
-<h2>SelectedMovieTime</h2>
+<h2>Movie Seat</h2>
 
 <p style="float:right">
     @Html.ActionLink("Order Cart", "ViewCart")
 </p>
+
+<p id="Msg"></p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Hall.HallNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShowTime)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SeatNumber)
@@ -31,9 +30,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Hall.HallNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShowTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SeatNumber)
@@ -67,13 +63,22 @@
             },
             success: function (response) {
 
-                if (response.CheckSeat = true) {
+                if (response.CheckSeat == true) {
+                    debugger
+                    var msg = $('#Msg').text(response.text).attr('class', "alert alert-success").show();
+                    msg.fadeOut(3000);
                     getid.attr("disabled", true);
+                }
+                else {
+                    debugger
+                    var msg = $('#Msg').text(response.text).attr('class', "alert alert-warning").show();
+                    msg.fadeOut(3000);
                 }
 
             }
         })
     }
+
     const CheckStatus = () => {
         var status = $(".Status").toArray();
         debugger;
@@ -84,7 +89,7 @@
 
             if (getstatus.innerText == "Taken") {
                 GetSeatId = $("." + getstatus.id).children();
-                GetSeatId.attr("disabled", true);
+                GetSeatId.hide();
             }
         })
     }

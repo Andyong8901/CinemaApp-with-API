@@ -124,6 +124,7 @@ namespace CinemaApi.Controllers
         {
             return RepoCinema.GetMovieDetailByMovie(Id);
         }
+
         [HttpPost]
         [Route("api/Cinema/AddMovieDetail/")]
         public void AddHallMovieDetail(List<MovieDetail> movieDetails)
@@ -199,7 +200,7 @@ namespace CinemaApi.Controllers
         [HttpPost]
         public void AddSeatToCart(MovieCart Cart)
         {
-            AddSeatToCart(Cart);
+            RepoCinema.AddSeatToCart(Cart);
         }
 
         [Route("api/Cinema/RemoveCart/{id:int}")]

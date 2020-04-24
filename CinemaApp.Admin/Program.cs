@@ -49,29 +49,31 @@ namespace CinemaApp.Admin
                         IEnumerable<User> AllUsers;
                         response = GlobalVariables.WebApiClient.GetAsync("Cinema/GetUser").Result;
                         AllUsers = response.Content.ReadAsAsync<IEnumerable<User>>().Result;
-                        if (AllUsers.Count() == 0)
+                        if (AllUsers.Count() != 0)
                         {
-                            Console.Clear();
-                            Console.WriteLine("    Add User Start");
-                            CreateData.CreateUser();
-                            Console.WriteLine("    Add User Done");
-
-                            Console.WriteLine("    Add Movie Start");
-                            CreateData.CreateMovie();
-                            Console.WriteLine("    Add Movie Done");
-
-                            Console.WriteLine("    Add Hall Start");
-                            CreateData.CreateHall();
-                            Console.WriteLine("    Add Hall Done");
-
-                            Console.WriteLine("    Add Showing Movie Start");
-                            CreateData.CreateShowingMovie();
-                            Console.WriteLine("    Add Showing Movie Done");
-
-                            Console.WriteLine("    Add MovieSeat Start");
-                            CreateData.CreateMovieSeat("NoStatus");
-                            Console.WriteLine("    Add MovieSeat Done");
+                            Console.WriteLine("Already Have Data");
+                            break;
                         }
+                        Console.Clear();
+                        Console.WriteLine("    Add User Start");
+                        CreateData.CreateUser();
+                        Console.WriteLine("    Add User Done");
+
+                        Console.WriteLine("    Add Movie Start");
+                        CreateData.CreateMovie();
+                        Console.WriteLine("    Add Movie Done");
+
+                        Console.WriteLine("    Add Hall Start");
+                        CreateData.CreateHall();
+                        Console.WriteLine("    Add Hall Done");
+
+                        Console.WriteLine("    Add Showing Movie Start");
+                        CreateData.CreateShowingMovie();
+                        Console.WriteLine("    Add Showing Movie Done");
+
+                        Console.WriteLine("    Add MovieSeat Start");
+                        CreateData.CreateMovieSeat("NoStatus");
+                        Console.WriteLine("    Add MovieSeat Done");
                         break;
 
 

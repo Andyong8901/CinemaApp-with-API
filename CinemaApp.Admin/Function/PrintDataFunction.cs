@@ -79,7 +79,7 @@ namespace CinemaApp.Admin.Function
             AllMovieHall = response.Content.ReadAsAsync<IEnumerable<MovieDetail>>().Result;
             //End Get Movie Detail
 
-            if (AllMovieHall.Count() != 0)
+            if (AllMovieHall.Count() == 0)
             {
                 Console.WriteLine("No Movie Detail Data Can't Not Create Hall Seat");
             }

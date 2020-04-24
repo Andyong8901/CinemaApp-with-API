@@ -24,6 +24,7 @@ namespace Cinema.InfrastructurePersistance.Repository
         public void AddUser(User user)
         {
             db.Users.Add(user);
+            Save();
         }
         public void AddUserList(List<User> user)
         {
@@ -31,6 +32,7 @@ namespace Cinema.InfrastructurePersistance.Repository
             if (check.Count == 0)
             {
                 db.Users.AddRange(user);
+                Save();
             }
         }
         public User CheckUserLogin(User user)
@@ -45,9 +47,9 @@ namespace Cinema.InfrastructurePersistance.Repository
         {
             return db.Movies;
         }
-        public Movie GetMovie(int id)
+        public Movie GetMovie(int MovieNo)
         {
-            return db.Movies.Find(id);
+            return db.Movies.SingleOrDefault(m=>m.MovieNo == MovieNo);
         }
         public void AddMovieList(List<Movie> movies)
         {
@@ -55,6 +57,7 @@ namespace Cinema.InfrastructurePersistance.Repository
             if (check.Count == 0)
             {
                 db.Movies.AddRange(movies);
+                Save();
             }
         }
         //Movie End
@@ -66,7 +69,7 @@ namespace Cinema.InfrastructurePersistance.Repository
         }
         public Hall GetHall(int id)
         {
-            return db.Halls.Find(id);
+            return db.Halls.SingleOrDefault(h=>h.HallNo == id);
         }
         public void AddHallList(List<Hall> halls)
         {
@@ -74,6 +77,7 @@ namespace Cinema.InfrastructurePersistance.Repository
             if (check.Count == 0)
             {
                 db.Halls.AddRange(halls);
+                Save();
             }
         }
         //Hall End
@@ -93,6 +97,7 @@ namespace Cinema.InfrastructurePersistance.Repository
             if (check.Count == 0)
             {
                 db.MovieDetails.AddRange(halls);
+                Save();
             }
         }
         public IEnumerable<MovieDetail> GetMovieDetailByMovie(int Id)
@@ -122,8 +127,8 @@ namespace Cinema.InfrastructurePersistance.Repository
             if (CheckSeat.Count() == 0)
             {
                 db.HallSeats.AddRange(Seat);
+                Save();
             }
-            Save();
         }
         public void DeleteSeat()
         {
@@ -225,6 +230,6 @@ namespace Cinema.InfrastructurePersistance.Repository
                 Save();
             }
         }
-        //End Movie Cart
+        //End Movie Cart+
     }
 }

@@ -33,6 +33,20 @@ namespace CinemaApp.Customer.Controllers
             }
             return View();
         }
+        public User CheckUser()
+        {
+            var CustomerId = Convert.ToInt32(Session["UserId"]);
+
+            response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetUser/{CustomerId}/").Result;
+            var CheckLogin = response.Content.ReadAsAsync<User>().Result;
+
+            if (CheckLogin == null)
+            {
+                RedirectToAction("Login");
+            }
+            return CheckLogin;
+        }
+
         public ActionResult Register()
         {
             return View();
@@ -40,14 +54,15 @@ namespace CinemaApp.Customer.Controllers
 
         [HttpPost]
         public ActionResult Register(User user)
-        { 
-            response = GlobalVariables.WebApiClient.PostAsJsonAsync($"Cinema/AddUsers/",user).Result;
+        {
+            response = GlobalVariables.WebApiClient.PostAsJsonAsync($"Cinema/AddUsers/", user).Result;
             return RedirectToAction("Login");
         }
 
         // GET: Movies
         public ActionResult Index()
         {
+            CheckUser();
             IEnumerable<Movie> AllMovie;
             response = GlobalVariables.WebApiClient.GetAsync("Cinema/GetMovie").Result;
             AllMovie = response.Content.ReadAsAsync<IEnumerable<Movie>>().Result;
@@ -57,6 +72,7 @@ namespace CinemaApp.Customer.Controllers
         // GET: Movie Detail
         public ActionResult SelectedMovie(int? id)
         {
+            CheckUser();
             IEnumerable<MovieDetail> AllMovieDetail;
             response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetMovieDetail/{id}").Result;
             AllMovieDetail = response.Content.ReadAsAsync<IEnumerable<MovieDetail>>().Result;
@@ -66,6 +82,9 @@ namespace CinemaApp.Customer.Controllers
 
         public ActionResult SelectedMovieTime(int? id, int HallId)
         {
+            CheckUser();
+            Session["MovieDetail"] = id;
+            Session["HallId"] = HallId;
             IEnumerable<HallSeat> hallSeat;
             response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetHallSeatByTime/{id}/{HallId}").Result;
             hallSeat = response.Content.ReadAsAsync<IEnumerable<HallSeat>>().Result;
@@ -75,13 +94,14 @@ namespace CinemaApp.Customer.Controllers
 
         public ActionResult ViewCart()
         {
-            var UserId = Convert.ToInt32(Session["UserId"]);
-
+            var user = CheckUser();
+            ViewBag.DetailId =Convert.ToInt32(Session["MovieDetail"]);
+            ViewBag.HallId = Convert.ToInt32(Session["HallId"]);
             IEnumerable<MovieCart> MovieCarts;
-            response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetCartById/{UserId}/").Result;
+            response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetCartById/{user.UserId}/").Result;
             MovieCarts = response.Content.ReadAsAsync<IEnumerable<MovieCart>>().Result;
 
-            ViewBag.Total = TotalAll(UserId);
+            ViewBag.Total = TotalAll(user.UserId);
 
             return View(MovieCarts);
         }
@@ -90,23 +110,18 @@ namespace CinemaApp.Customer.Controllers
         //SelectSeat
         public ActionResult SelectSeat(int? SeatId)
         {
-            var UserId = Convert.ToInt32(Session["UserId"]);
+            var user = CheckUser();
 
             IEnumerable<MovieCart> MovieCarts;
-            response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetCartById/{UserId}/").Result;
+            response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetCartById/{user.UserId}/").Result;
             MovieCarts = response.Content.ReadAsAsync<IEnumerable<MovieCart>>().Result;
-            var checkOrderCart = MovieCarts.SingleOrDefault(mc=>mc.SeatId == SeatId);
-            
-            
+            var checkOrderCart = MovieCarts.SingleOrDefault(mc => mc.SeatId == SeatId);
+
             if (checkOrderCart == null)
             {
                 HallSeat hallSeat;
                 response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetSeatById/{SeatId}/").Result;
                 hallSeat = response.Content.ReadAsAsync<HallSeat>().Result;
-
-                response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetUser/{UserId}").Result;
-                var CheckUser = response.Content.ReadAsAsync<User>().Result;
-
 
                 IEnumerable<MovieDetail> AllMovieDetail;
                 response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetMovieDetail/").Result;
@@ -118,17 +133,20 @@ namespace CinemaApp.Customer.Controllers
                 {
                     SeatNo = hallSeat.SeatNumber,
                     SeatId = hallSeat.SeatId,
-                    UserId = CheckUser.UserId,
+                    UserId = user.UserId,
                     Amount = hallSeat.SeatPrice,
                     MovieName = GetMovieName.Movie.MovieName
                 };
 
                 response = GlobalVariables.WebApiClient.PostAsJsonAsync($"Cinema/AddCart/", cart).Result;
-
-                return Json(new { CheckSeat = true }, JsonRequestBehavior.AllowGet);
+                var text = "Successful Add Cart";
+                return Json(new { text, CheckSeat = true }, JsonRequestBehavior.AllowGet);
             }
-            
-            return Json(new { CheckSeat = true }, JsonRequestBehavior.AllowGet);
+            else
+            {
+                var text = "This Seat Already Have Inside Cart";
+                return Json(new { text, CheckSeat = false }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult RemoveCart(int? id)
@@ -170,13 +188,11 @@ namespace CinemaApp.Customer.Controllers
 
         public ActionResult UserCheckName(string Username)
         {
-            var UserId = Convert.ToInt32(Session["UserId"]);
-
             IEnumerable<User> CUsername;
             response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetUser/").Result;
             CUsername = response.Content.ReadAsAsync<IEnumerable<User>>().Result;
             var GetResult = CUsername.SingleOrDefault(cn => cn.Username == Username);
-            if (GetResult !=null)
+            if (GetResult != null)
             {
                 var text = "This Username Is Exist , Please Try Another Username";
                 return Json(new { text, Checkname = false }, JsonRequestBehavior.AllowGet);
@@ -186,8 +202,6 @@ namespace CinemaApp.Customer.Controllers
 
         public ActionResult UserCheckEmail(string Email)
         {
-            var UserId = Convert.ToInt32(Session["UserId"]);
-
             IEnumerable<User> CUsername;
             response = GlobalVariables.WebApiClient.GetAsync($"Cinema/GetUser/").Result;
             CUsername = response.Content.ReadAsAsync<IEnumerable<User>>().Result;
@@ -196,12 +210,17 @@ namespace CinemaApp.Customer.Controllers
             if (GetResult != null)
             {
                 var text = "This Email Is Exist , Please Try Another Email";
-                return Json(new {text, Checkemail = false }, JsonRequestBehavior.AllowGet);
+                return Json(new { text, Checkemail = false }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { CheckSeat = true }, JsonRequestBehavior.AllowGet);
         }
 
-       
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
